@@ -203,11 +203,68 @@ WHERE EXISTS (SELECT product_id FROM customers_likes WHERE customer_name ='Lary'
 
 
 
+--DELETE THE RECORDS IF THE CUSTOMER_NAME OF "ORANGE" EXISTS
+DELETE FROM customers_likes
+WHERE EXISTS (SELECT liked_products FROM customers_likes WHERE liked_products ='Orange');
+
+--
+
+CREATE TABLE employees
+(
+id	CHAR(9),
+name VARCHAR(50),
+state VARCHAR(50),
+salary SMALLINT,
+company VARCHAR(20)
+);
+
+INSERT INTO employees VALUES(123456789,'John Walker','Florida', 2500, 'IBM');
+INSERT INTO employees VALUES(234567890,'Brad Pitt','Florida', 1500, 'APPLE');
+INSERT INTO employees VALUES(345678901,'Eddie Murphy','Texas', 3600, 'IBM');
+INSERT INTO employees VALUES(456789012,'Eddie Murphy','Virginia', 1000, 'GOOGLE');
+INSERT INTO employees VALUES(567890123,'Eddie Murphy','Texas', 7000, 'MICROSOFT');
+INSERT INTO employees VALUES(456789012,'Brad Pitt','Texas', 1500, 'GOOGLE');
+INSERT INTO employees VALUES(123456710,'Mark Stone','Pensylvania', 2500, 'IBM');
 
 
 
 
+CREATE TABLE companies
+(
+company_id CHAR(9),
+company VARCHAR(20),
+number_of_employees SMALLINT
+);
 
+INSERT INTO companies VALUES(100,'IBM',12000);
+INSERT INTO companies VALUES(101,'GOOGLE',18000);
+INSERT INTO companies VALUES(102,'MICROSOFT',10000);
+INSERT INTO companies VALUES(103,'APPLE',21000);
+
+
+--QUERY NAME AND COMPANY VALUE WITH THE NUMBER OF EMPLOYEE VALUES MORE THAN 15000
+SELECT name,company
+FROM employees
+WHERE company IN (SELECT company FROM companies WHERE number_of_employees > 15000);
+
+
+--QUERY COMPAY_ID AND COMPANY VALUES IN FLORIDA
+SELECT company_id, company
+FROM companies
+WHERE company IN (SELECT company FROM employees where state ='Florida');
+
+--QUERY THE NAME AND STATE VALUES WITH THE COMPANY ID IS HIGHER THAN 100
+SELECT name,state,company
+FROM employees
+WHERE company IN (SELECT company FROM companies WHERE company_id > '100');
+
+SELECT*
+FROM companies;
+
+
+
+SELECT*
+FROM employees;
 
 SELECT*
 FROM customers_likes;
