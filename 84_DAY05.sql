@@ -125,8 +125,72 @@ RENAME COLUMN company_ındustry TO company_profession;
 
 --HOW TO MODIFY THE FIELD(CONSTRAINT, DATA TYPE CHANGES, DATA SIZE CHANGES)
 
+--WHEN ADDİNG CONSTRAİNT WATCH OUT THE DATA'S CASE
+--TO ADD CONSTRAİNT
+
+ALTER TABLE employees
+ALTER COLUMN number_of_workers SET NOT NULL;
 
 
+--ADD QNIQUE CONSTRAİN THE COMPANY_PROFESSION
+ALTER TABLE employees
+ADD CONSTRAINT company_profession_unique UNIQUE (company_profession); 
+
+--ADD QNIQUE CONSTRAİN THE WORKER_ADDRESS
+ALTER TABLE employees
+ADD CONSTRAINT worker_address_unıque UNIQUE (worker_address); --BECAUSE THA DATA IS DUBLICATED WE CANNOT ADD CONSTRAINT
+
+
+--HOW TO CHANGE DATA SIZE
+--CHANGE THE COMPANY_PROFESSION DATA TYPE AS CHAR(5)
+ALTER TABLE employees
+ALTER COLUMN company_profession TYPE CHAR(5);
+
+--CHANGE THE WORKER_ADDRESS DATA TYPE AS CHAR(5)
+ALTER TABLE employees
+ALTER COLUMN worker_address TYPE CHAR(10);--data size of the column cannot be reduced. 
+
+--FUNCTİONS
+--HOW TO WRİTE A FUNCTİON
+--to fulfıll some duty, some functions can be created.
+
+--ALL FUNCTİONS RETURN A DATA IN SQL 
+--IF A FUNCTION DOES NOT RETURN A DATA THAT IS CALLED 'PROCEDURE																																																																																																																																																																			'
+
+
+
+CREATE FUNCTION addf(x NUMERIC, y NUMERIC)
+RETURNS NUMERIC
+LANGUAGE plpgsql
+AS
+$$
+	BEGIN
+
+	RETURN x+y;
+
+	END
+$$
+
+--Write a function that calculates the volume of a cone
+CREATE FUNCTION volume_of_cone (r NUMERIC, h NUMERIC)
+RETURNS NUMERIC
+LANGUAGE plpgsql
+AS
+$$
+	BEGIN
+
+	RETURN 3.14*r*r*h*1/3;
+
+	END
+$$
+
+
+
+SELECT*
+FROM volume_of_cone(3,6) AS the_volume_of_the_cone;
+
+SELECT*
+FROM addf(2,4) AS ADDITION;
 
 
 SELECT*
