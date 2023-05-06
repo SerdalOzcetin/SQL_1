@@ -72,6 +72,9 @@ CONSTRAINT student_id_fk FOREIGN KEY(student_id) REFERENCES parents(student_id)
 );
 
 --HOW TO ADD CHECK CONSTRAİNT
+--Why do we use check constraints?
+--A check constraint is a rule that specifies the values that are allowed in one or more columns of every row of a base table.
+--For example, you can define a check constraint to ensure that all values in a column that contains ages are positive numbers.
 
 CREATE TABLE students
 (
